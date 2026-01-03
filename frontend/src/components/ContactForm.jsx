@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/contacts";
+const API_URL = "https://contact-manager-mern-app.onrender.com/api/contacts";
 
 function ContactForm({ onAdd }) {
   const [form, setForm] = useState({
