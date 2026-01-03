@@ -1,4 +1,4 @@
-function ContactList({ contacts }) {
+function ContactList({ contacts, onDelete }) {
   return (
     <div>
       <h3>Submitted Contacts</h3>
@@ -11,6 +11,16 @@ function ContactList({ contacts }) {
           <p>{c.email}</p>
           <p>{c.phone}</p>
           {c.message && <p>{c.message}</p>}
+
+          <button
+            style={{
+              background: "#dc2626",
+              marginTop: "8px"
+            }}
+            onClick={() => onDelete(c._id)}
+          >
+            Delete
+          </button>
         </div>
       ))}
     </div>

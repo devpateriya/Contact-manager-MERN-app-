@@ -17,11 +17,16 @@ function App() {
     fetchContacts();
   }, []);
 
+  const deleteContact = async (id) => {
+    await axios.delete(`${API_URL}/${id}`);
+    fetchContacts();
+  };
+
   return (
     <div className="container">
       <h2 className="title">Contact Manager</h2>
       <ContactForm onAdd={fetchContacts} />
-      <ContactList contacts={contacts} />
+      <ContactList contacts={contacts} onDelete={deleteContact} />
     </div>
   );
 }

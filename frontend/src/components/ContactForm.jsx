@@ -20,11 +20,28 @@ function ContactForm({ onAdd }) {
     setSuccess("");
   };
 
+  const isInvalid = !form.name || !form.email || !form.phone;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.name || !form.email || !form.phone) {
+    // Required check
+    if (isInvalid) {
       setError("Name, Email and Phone are required");
+      return;
+    }
+
+    // Email validation (basic)
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    if (!emailRegex.test(form.email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    // Phone validation (digits only, length 10–15)
+    const phoneRegex = /^[0-9]{10,15}$/;
+    if (!phoneRegex.test(form.phone)) {
+      setError("Phone number should contain 10–15 digits only");
       return;
     }
 
@@ -35,37 +52,41 @@ function ContactForm({ onAdd }) {
     onAdd();
   };
 
-  const isInvalid = !form.name || !form.email || !form.phone;
-
   return (
     <form onSubmit={handleSubmit}>
       <input
         name="name"
-        placeholder="Name"
+        placeholder="Name *"
         value={form.name}
         onChange={handleChange}
       />
 
       <input
         name="email"
-        placeholder="Email"
+        placeholder="Email *"
         value={form.email}
         onChange={handleChange}
       />
 
       <input
         name="phone"
-        placeholder="Phone"
+        placeholder="Phone *"
         value={form.phone}
         onChange={handleChange}
       />
 
       <textarea
         name="message"
-        placeholder="Message"
+        placeholder="Message (optional)"
         value={form.message}
         onChange={handleChange}
       />
+
+      {isInvalid && (
+        <p style={{ fontSize: "14px", color: "#555" }}>
+          Please fill all required fields (*)
+        </p>
+      )}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p className="success">{success}</p>}
