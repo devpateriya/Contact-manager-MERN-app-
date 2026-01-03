@@ -46,7 +46,7 @@ Frontend (Netlify):
 👉 https://guileless-figolla-b2fa13.netlify.app/
 
 Backend API (Render):  
-👉 https://contact-manager-mem-app.onrender.com
+👉 https://contact-manager-mern-app.onrender.com
 
 ---
 
